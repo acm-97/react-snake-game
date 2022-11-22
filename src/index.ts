@@ -1,1 +1,3 @@
-export { GameArea } from '@/components';
+import { GameArea } from './components';
+
+export default GameArea;
