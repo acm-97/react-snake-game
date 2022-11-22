@@ -1,31 +1,35 @@
 {
-  "name": "react-snake-game",
+  "name": "@acm-97/react-snake-game",
   "author": "acm-97",
+  "description": "React component that displays the classic snake's game",
   "keywords": [
+    "react",
+    "typescript",
     "react-snake-game",
-    "snake",
     "snake-game"
   ],
   "version": "0.1.0",
-  "private": true,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jawblia/npm-test.git"
+    "url": "git+https://github.com/acm-97/react-snake-game.git"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:esm": "tsc --noEmit false",
+    "build:cjs": "tsc --noEmit false --module commonjs --outDir dist/cjs",
     "test": "react-scripts test",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
-    "prettier": "prettier --write \"{src,tests}/**/*.{js,ts,jsx,tsx}\""
+    "prettier": "prettier --write \"{src,tests}/**/*.{js,ts,jsx,tsx}\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run prettier && npm run lint"
+  },
+  "yarn.build": {
+    "input": "src",
+    "output": "dist"
   },
   "eslintConfig": {
     "extends": [
@@ -73,5 +77,12 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "^2.6.2",
     "typescript": "^4.4.2"
-  }
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }
