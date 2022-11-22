@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 
 import { gameAreaStyles } from '../styles/gameArea';
 import { useSnake } from '../hooks';
-import { Food, Snake } from '.';
+import Food from './Food';
+import Snake from './Snake';
+import { getRandomCoordinates } from '@/utils';
 
 export type AppProps = {
   speed?: number;
@@ -21,7 +23,7 @@ const GameArea = ({
   onGameOver: _onGameOver,
   onEatFood: _onEatFood,
 }: AppProps) => {
-  const { canMove, snakeDots, food, onKeyDown, checkIfOutOfBorders, checkIfCollapsed, checkIfEat, moveSnake } =
+  const { canMove, snakeDots, food, setFood, onKeyDown, checkIfOutOfBorders, checkIfCollapsed, checkIfEat, moveSnake } =
     useSnake({ _speed, _canMove, _direction, _snakeDots, _onGameOver, _onEatFood });
 
   useEffect(() => {
@@ -42,6 +44,12 @@ const GameArea = ({
     document.addEventListener('keydown', onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (food.length === 0) {
+      setFood(getRandomCoordinates);
+    }
+  }, [food.length, setFood]);
 
   return (
     <div style={gameAreaStyles} className="game-area">
