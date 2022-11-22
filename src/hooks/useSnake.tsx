@@ -2,15 +2,26 @@ import { useCallback, useState } from 'react';
 
 import { getRandomCoordinates } from '../utils';
 
-const useSnake = () => {
-  const [food, setFood] = useState(getRandomCoordinates);
-  const [speed, setSpeed] = useState(200);
-  const [canMove, setCanmove] = useState(true);
-  const [direction, setDirection] = useState<string | null>('RIGHT');
-  const [snakeDots, setSnakeDots] = useState<number[][]>([
-    [0, 0],
-    [2, 0],
-  ]);
+export type useSnakeProps = {
+  _speed?: number;
+  _canMove?: boolean;
+  _direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+  _snakeDots?: number[][];
+  _onGameOver?: () => void;
+  _onEatFood?: () => void;
+};
+
+const useSnake = ({ _speed, _canMove, _direction, _snakeDots, _onGameOver, _onEatFood }: useSnakeProps) => {
+  const [food, setFood] = useState<number[]>(getRandomCoordinates);
+  const [speed, setSpeed] = useState<number>(_speed || 200);
+  const [canMove, setCanmove] = useState<boolean>(_canMove || true);
+  const [direction, setDirection] = useState<string>(_direction || 'RIGHT');
+  const [snakeDots, setSnakeDots] = useState<number[][]>(
+    _snakeDots || [
+      [0, 0],
+      [2, 0],
+    ],
+  );
 
   const onKeyDown = useCallback(
     (e: any) => {
@@ -78,6 +89,7 @@ const useSnake = () => {
     ]);
     setCanmove(false);
     setFood(getRandomCoordinates());
+    _onGameOver && _onGameOver();
   };
 
   const checkIfOutOfBorders = () => {
@@ -111,7 +123,7 @@ const useSnake = () => {
     if (head[0] === myfood[0] && head[1] === myfood[1]) {
       setFood(getRandomCoordinates());
       enLargeSnake();
-      // onGameOver();
+      _onEatFood && _onEatFood();
     }
   };
 
