@@ -3,7 +3,8 @@ import classNames from 'classnames';
 
 import { useSnake } from '@/hooks';
 import { Food, Snake } from '@/components';
-import { AppProps } from '@/App';
+
+import { AppProps } from '../App';
 
 function GameArea({
   speed: _speed,
@@ -14,12 +15,7 @@ function GameArea({
   onEatFood: _onEatFood,
 }: AppProps) {
   const { canMove, snakeDots, food, onKeyDown, checkIfOutOfBorders, checkIfCollapsed, checkIfEat, moveSnake } =
-    useSnake(_speed
-      _canMove
-      _direction
-      _snakeDots
-      _onGameOver
-      _onEatFood);
+    useSnake({ _speed, _canMove, _direction, _snakeDots, _onGameOver, _onEatFood });
 
   useEffect(() => {
     let interval: any = null;

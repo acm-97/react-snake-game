@@ -1,12 +1,31 @@
 {
-  "name": "my-app",
+  "name": "react-snake-game",
+  "author": "acm-97",
+  "keywords": [
+    "react-snake-game",
+    "snake",
+    "snake-game"
+  ],
   "version": "0.1.0",
   "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jawblia/npm-test.git"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+    "prettier": "prettier --write \"{src,tests}/**/*.{js,ts,jsx,tsx}\""
   },
   "eslintConfig": {
     "extends": [
