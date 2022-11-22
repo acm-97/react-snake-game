@@ -1,5 +1,6 @@
 {
   "name": "@acm-97/react-snake-game",
+  "version": "0.2.4",
   "author": "acm-97",
   "description": "React component that displays the classic snake's game",
   "keywords": [
@@ -8,7 +9,6 @@
     "react-snake-game",
     "snake-game"
   ],
-  "version": "0.1.0",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -53,9 +53,8 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "classnames": "^2.3.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"
   },

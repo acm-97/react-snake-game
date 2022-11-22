@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { getRandomCoordinates } from '@/utils';
+import { getRandomCoordinates } from '../utils';
 
 type useSnakeProps = {
   _speed?: number;
