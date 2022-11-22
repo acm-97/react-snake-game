@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import { getRandomCoordinates } from '../utils';
+import { getRandomCoordinates } from '@/utils';
 
-export type useSnakeProps = {
+type useSnakeProps = {
   _speed?: number;
   _canMove?: boolean;
   _direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';

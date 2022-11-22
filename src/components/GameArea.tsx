@@ -4,7 +4,15 @@ import classNames from 'classnames';
 import { useSnake } from '@/hooks';
 import { Food, Snake } from '@/components';
 
-import { AppProps } from '../App';
+
+export type AppProps = {
+  speed?: number;
+  canMove?: boolean;
+  direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+  snakeDots?: number[][];
+  onGameOver?: () => void;
+  onEatFood?: () => void;
+};
 
 function GameArea({
   speed: _speed,

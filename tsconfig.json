@@ -6,6 +6,11 @@
       "dom.iterable",
       "esnext"
     ],
+    "rootDir": "./src",
+    "outDir": "./dist/esm",
+    "declaration": true,
+    "importHelpers": true,
+    "sourceMap": true,
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
@@ -26,5 +31,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
 }
