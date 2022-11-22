@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import logo from './logo.svg';
-import './App.css';
+import { useSnake } from './hooks';
+import { Food, Snake } from './components';
 
 function App() {
+  const { canMove, snakeDots, food, onKeyDown, checkIfOutOfBorders, checkIfCollapsed, checkIfEat, moveSnake } = useSnake();
+
+  useEffect(() => {
+    let interval: any = null
+    if (canMove) {
+      checkIfOutOfBorders();
+      checkIfCollapsed();
+      checkIfEat();
+      interval = setInterval(() => moveSnake(), 200);
+    }
+
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [snakeDots, canMove]);
+
+  useEffect(() => {
+    // document.onkeydown = onKeyDown;
+    document.addEventListener('keydown', onKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="game-area">
+      <Snake snakeDots={snakeDots} />
+      <Food dot={food} />
     </div>
   );
 }
