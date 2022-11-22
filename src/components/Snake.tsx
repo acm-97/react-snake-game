@@ -2,7 +2,6 @@ import React from 'react';
 
 import { snakeStyles } from '../styles/snake';
 
-
 type FoodProps = {
   snakeDots: any[];
 };

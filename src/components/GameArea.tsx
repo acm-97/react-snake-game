@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
+import Snake from './Snake';
+import Food from './Food';
+import { getRandomCoordinates } from '../utils';
 import { gameAreaStyles } from '../styles/gameArea';
 import { useSnake } from '../hooks';
-import Food from './Food';
-import Snake from './Snake';
-import { getRandomCoordinates } from '@/utils';
 
 export type AppProps = {
   speed?: number;
