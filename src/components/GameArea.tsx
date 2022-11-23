@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import Snake from './Snake';
+import Obstacle from './Obstacles';
 import Food from './Food';
 import { getRandomCoordinates } from '../utils';
 import { gameAreaStyles } from '../styles/gameArea';
@@ -10,19 +11,22 @@ export type UserStylesProps = {
   gameArea?: object;
   snake?: object;
   food?: object;
+  obstacles?: object;
 };
 
 export type StateProps = {
   foodCoordinates?: [number, number];
   snakeCoordinates?: [number, number][];
-  direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+  direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
   speed?: number;
   isRunning?: boolean;
+  numObstacles?: number;
+  generateObstacles?: boolean;
 };
 
 export type GameAreaProps = {
-  onGameOver?: () => void;
-  onEatFood?: () => void;
+  onGameOver?: (points: number) => void;
+  onEatFood?: (snakePosition: number[], foodPosition: number[]) => void;
   styles?: UserStylesProps;
   state?: StateProps;
 };
@@ -38,6 +42,8 @@ const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFoo
     checkIfCollapsed,
     checkIfEat,
     moveSnake,
+    obstacles,
+    generateObstacles,
   } = useGameArea({ state, _onGameOver, _onEatFood });
 
   useEffect(() => {
@@ -60,15 +66,16 @@ const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFoo
   }, []);
 
   useEffect(() => {
-    if (food.length === 0) {
-      setFood(getRandomCoordinates);
-    }
-  }, [food.length, setFood]);
+    setFood(getRandomCoordinates);
+    state?.generateObstacles && generateObstacles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state?.generateObstacles]);
 
   return (
     <div style={{ ...gameAreaStyles, ...userStyles?.gameArea }} className="game-area">
       <Snake userStyles={userStyles} snakeDots={snakeDots} />
       <Food userStyles={userStyles} dot={food} />
+      <Obstacle obstacles={obstacles} />
     </div>
   );
 };
