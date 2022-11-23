@@ -1,0 +1,1 @@
+export { GameArea } from '@/components';

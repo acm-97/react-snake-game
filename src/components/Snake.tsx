@@ -4,7 +4,7 @@ type FoodProps = {
   snakeDots: any[];
 };
 
-const Snake = ({snakeDots}: FoodProps) => (
+const Snake = ({ snakeDots }: FoodProps) => (
   <div>
     {snakeDots.map((dot, i) => {
       const style = {

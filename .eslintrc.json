@@ -86,11 +86,15 @@
     "@typescript-eslint/restrict-template-expressions": "off"
   },
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": ["**/*.ts", "**/*.tsx"]
+    },
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "paths": ["node_modules", "src"],
-        "moduleDirectory": ["node_modules", "src"]
+      "typescript": {
+        // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "alwaysTryTypes": true, 
+        // use <root>/path/to/folder/tsconfig.json
+      "project": "./tsconfig.json"
       }
     }
   }

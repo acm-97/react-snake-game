@@ -6,7 +6,13 @@
       "dom.iterable",
       "esnext"
     ],
+    "rootDir": "./src",
+    "outDir": "./dist/esm",
+    "declaration": true,
+    "importHelpers": true,
+    "sourceMap": true,
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -19,11 +25,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"],
 }
