@@ -3,12 +3,12 @@ import React from 'react';
 import { UserStylesProps } from './GameArea';
 import { snakeStyles } from '../styles/snake';
 
-type FoodProps = {
-  snakeDots: any[];
+type SnakeProps = {
+  snakeDots: number[][];
   userStyles?: UserStylesProps;
 };
 
-const Snake = ({ userStyles, snakeDots }: FoodProps) => (
+const Snake = ({ userStyles, snakeDots }: SnakeProps) => (
   <div className="snake-body">
     {snakeDots.map((dot, i) => {
       const style = {
