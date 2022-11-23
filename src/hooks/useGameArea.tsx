@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { StateProps } from 'src/components/GameArea';
 
-import { getRandomCoordinates } from '../utils';
+import { getRandomCoordinates, getRandomObstacles } from '../utils';
 
 export type useGameAreaProps = {
   _onGameOver?: (points: number) => void;
@@ -19,6 +19,8 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
     [0, 0],
     [2, 0],
   ]);
+  const [obstacles, setObstacles] = useState<number[][]>([]);
+  const [numObstacles, setNumObstacles] = useState<number>(4);
 
   const startGame = () => {
     setIsRunning(true);
@@ -37,6 +39,8 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
   useMemo(() => state?.snakeCoordinates && setSnakeDots(state?.snakeCoordinates), [state?.snakeCoordinates]);
 
   useMemo(() => state?.foodCoordinates && setFood(state?.foodCoordinates), [state?.foodCoordinates]);
+
+  useMemo(() => state?.numObstacles && setNumObstacles(state?.numObstacles), [state?.numObstacles]);
 
   const onKeyDown = useCallback(
     (e: any) => {
@@ -97,51 +101,89 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
     [direction, snakeDots],
   );
 
-  const onGameOver = () => {
+  const generateObstacles = useCallback(() => {
+    let count = 1;
+    const obs = [];
+    while (count <= numObstacles) {
+      const ob = getRandomObstacles();
+      if (food[0] !== ob[0] || food[1] !== ob[1]) {
+        obs.push(ob);
+        count++;
+      }
+    }
+    setObstacles(obs);
+  }, [food, numObstacles]);
+
+  const onGameOver = useCallback(() => {
     const points: number = snakeDots.length - 2;
-    setSnakeDots([
-      [0, 0],
-      [2, 0],
-    ]);
+    setSnakeDots(
+      state?.snakeCoordinates || [
+        [0, 0],
+        [2, 0],
+      ],
+    );
     setFood(getRandomCoordinates());
+    state?.generateObstacles && generateObstacles();
+    setDirection(state?.direction || 'RIGHT');
     _onGameOver && _onGameOver(points);
     stopGame();
-  };
+  }, [
+    _onGameOver,
+    generateObstacles,
+    snakeDots.length,
+    state?.direction,
+    state?.generateObstacles,
+    state?.snakeCoordinates,
+  ]);
 
-  const checkIfOutOfBorders = () => {
+  const checkIfOutOfBorders = useCallback(() => {
     let head = snakeDots[snakeDots.length - 1];
     if (head[0] >= 100 || head[1] >= 100 || head[0] < 0 || head[1] < 0) {
       onGameOver();
     }
-  };
+  }, [onGameOver, snakeDots]);
 
-  const checkIfCollapsed = () => {
+  const checkIfCollapsed = useCallback(() => {
     let snake = [...snakeDots];
     let head = snake[snake.length - 1];
     snake.pop();
     snake.forEach((dot) => {
-      if (head[0] === dot[0] && head[1] === dot[1]) {
+      if (
+        (head[0] === dot[0] && head[1] === dot[1]) ||
+        (head[0] === dot[0] + 4 && head[1] === dot[1] + 4) ||
+        (head[0] === dot[0] - 4 && head[1] === dot[1] - 4)
+      ) {
         onGameOver();
       }
+      obstacles.forEach((ob) => {
+        if (
+          (head[0] === ob[0] && head[1] === ob[1]) ||
+          (head[0] === ob[0] + 5 && head[1] === ob[1] + 5) ||
+          (head[0] === ob[0] - 5 && head[1] === ob[1] - 5)
+        ) {
+          onGameOver();
+        }
+      });
     });
-  };
+  }, [obstacles, onGameOver, snakeDots]);
 
-  const enLargeSnake = () => {
+  const enLargeSnake = useCallback(() => {
     let newSnake = [...snakeDots];
 
     newSnake.unshift([]);
     setSnakeDots(newSnake);
-  };
+  }, [snakeDots]);
 
-  const checkIfEat = () => {
+  const checkIfEat = useCallback(() => {
     let head = snakeDots[snakeDots.length - 1];
     let myfood = food;
     if (head[0] === myfood[0] && head[1] === myfood[1]) {
       setFood(getRandomCoordinates());
+      state?.generateObstacles && generateObstacles();
       enLargeSnake();
       _onEatFood && _onEatFood(head, myfood);
     }
-  };
+  }, [_onEatFood, enLargeSnake, food, generateObstacles, snakeDots, state?.generateObstacles]);
 
   return {
     snakeDots,
@@ -160,6 +202,8 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
     onGameOver,
     startGame,
     stopGame,
+    obstacles,
+    generateObstacles,
   };
 };
 
