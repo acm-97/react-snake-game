@@ -1,35 +1,12 @@
 {
-  "name": "@acm-97/react-snake-game",
-  "version": "0.7.18",
-  "author": "acm-97",
-  "description": "React component that displays the classic snake's game",
-  "keywords": [
-    "react",
-    "typescript",
-    "react-snake-game",
-    "snake-game"
-  ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/acm-97/react-snake-game.git"
-  },
+  "name": "example",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc --noEmit false",
-    "build:cjs": "tsc --noEmit false --module commonjs --outDir dist/cjs",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
-    "prettier": "prettier --write \"{src,tests}/**/*.{js,ts,jsx,tsx}\"",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run prettier && npm run lint"
-  },
-  "yarn.build": {
-    "input": "src",
-    "output": "dist"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -50,38 +27,32 @@
     ]
   },
   "dependencies": {
+    "@acm-97/react-snake-game": "^0.7.17",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
-    "eslint": "^8.16.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.30.0",
-    "eslint-plugin-react-hooks": "^4.5.0",
-    "prettier": "^2.6.2",
-    "typescript": "^4.4.2"
-  },
-  "peerDependencies": {
-    "react": ">=17"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ]
+      "@types/jest": "^27.0.1",
+      "@types/node": "^16.7.13",
+      "@types/react": "^18.0.0",
+      "@types/react-dom": "^18.0.0",
+      "@typescript-eslint/eslint-plugin": "^5.25.0",
+      "@typescript-eslint/parser": "^5.25.0",
+      "eslint": "^8.16.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-import-resolver-typescript": "^3.5.2",
+      "eslint-plugin-import": "^2.26.0",
+      "eslint-plugin-jsx-a11y": "^6.5.1",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-react": "^7.30.0",
+      "eslint-plugin-react-hooks": "^4.5.0",
+      "prettier": "^2.6.2",
+      "typescript": "^4.4.2"
+  }
 }
