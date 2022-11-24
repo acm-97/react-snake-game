@@ -4,7 +4,7 @@ import Snake from './Snake';
 import Obstacle from './Obstacles';
 import Food from './Food';
 import { getRandomCoordinates } from '../utils';
-import { gameAreaStyles } from '../styles/gameArea';
+import { gameAreaLimitsStyles, gameAreaStyles } from '../styles/gameArea';
 import { useGameArea } from '../hooks';
 
 export type UserStylesProps = {
@@ -72,7 +72,7 @@ const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFoo
   }, [state?.generateObstacles]);
 
   return (
-    <div style={{ ...gameAreaStyles, ...userStyles?.gameArea }} className="game-area">
+    <div className="game-area" style={{ ...gameAreaStyles, ...userStyles?.gameArea }}>
       <Snake userStyles={userStyles} snakeDots={snakeDots} />
       <Food userStyles={userStyles} dot={food} />
       <Obstacle obstacles={obstacles} />

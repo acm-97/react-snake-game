@@ -17,7 +17,7 @@ const Obstacle = ({ userStyles, obstacles }: ObstacleProps) => (
         top: `${dot[1]}%`,
         ...userStyles?.obstacles,
       };
-      return <div className="obstacle" key={i} style={style} />;
+      return <div id={`obstacle-${i}`} className="obstacle" key={i} style={style} />;
     })}
   </div>
 );

@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { StateProps } from 'src/components/GameArea';
 
-import { getRandomCoordinates, getRandomObstacles } from '../utils';
+import { detectColition, getRandomCoordinates, getRandomObstacles } from '../utils';
 
 export type useGameAreaProps = {
   _onGameOver?: (points: number) => void;
@@ -47,16 +47,16 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
       e = e || window.event;
       switch (e.keyCode) {
         case 38:
-          setDirection('UP');
+          setDirection((prev) => (prev !== 'DOWN' ? 'UP' : prev));
           break;
         case 40:
-          setDirection('DOWN');
+          setDirection((prev) => (prev !== 'UP' ? 'DOWN' : prev));
           break;
         case 37:
-          setDirection('LEFT');
+          setDirection((prev) => (prev !== 'RIGHT' ? 'LEFT' : prev));
           break;
         case 39:
-          setDirection('RIGHT');
+          setDirection((prev) => (prev !== 'LEFT' ? 'RIGHT' : prev));
           break;
 
         default:
@@ -147,20 +147,12 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
     let snake = [...snakeDots];
     let head = snake[snake.length - 1];
     snake.pop();
-    snake.forEach((dot) => {
-      if (
-        (head[0] === dot[0] && head[1] === dot[1]) ||
-        (head[0] === dot[0] + 4 && head[1] === dot[1] + 4) ||
-        (head[0] === dot[0] - 4 && head[1] === dot[1] - 4)
-      ) {
+    snake.forEach((dot, sPos) => {
+      if (head[0] === dot[0] && head[1] === dot[1]) {
         onGameOver();
       }
-      obstacles.forEach((ob) => {
-        if (
-          (head[0] === ob[0] && head[1] === ob[1]) ||
-          (head[0] === ob[0] + 5 && head[1] === ob[1] + 5) ||
-          (head[0] === ob[0] - 5 && head[1] === ob[1] - 5)
-        ) {
+      obstacles.forEach((ob, oPos) => {
+        if (detectColition(sPos, oPos)) {
           onGameOver();
         }
       });

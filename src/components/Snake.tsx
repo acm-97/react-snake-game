@@ -17,7 +17,7 @@ const Snake = ({ userStyles, snakeDots }: SnakeProps) => (
         top: `${dot[1]}%`,
         ...userStyles?.snake,
       };
-      return <div className="snake-body-part" key={i} style={style} />;
+      return <div id={`snake-body-part-${i}`} className="snake-body-part" key={i} style={style} />;
     })}
   </div>
 );
