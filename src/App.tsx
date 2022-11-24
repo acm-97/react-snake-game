@@ -49,7 +49,7 @@ function App() {
             <h3>BEST SCORE: {bestScore}</h3>
             <h3 style={{ marginLeft: 35 }}>SCORE: {score}</h3>
           </div>
-          <button className="play-button" style={ButtonStyles} onClick={startGame}>
+          <button type="button" className="play-button" style={ButtonStyles} onClick={startGame}>
             Play
           </button>
         </div>
