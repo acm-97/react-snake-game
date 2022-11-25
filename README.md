@@ -112,7 +112,7 @@ const Component = () => {
 [npm-url]: https://www.npmjs.com/package/@acm-97/react-snake-game
 [npm-image]: https://img.shields.io/npm/v/@acm-97/react-snake-game
 [github-license]: https://img.shields.io/github/license/@acm-97/react-snake-game
-[github-license-url]: https://github.com/acm-97/react-snake-game/blob/main/LICENSE
+[github-license-url]: https://github.com/acm-97/react-snake-game/blob/main/LICENCE.md
 [github-build]: https://github.com/acm-97/react-snake-game/actions/workflows/publish.yml/badge.svg
 [github-build-url]: https://github.com/acm-97/react-snake-game/actions/workflows/publish.yml
 [npm-typescript]: https://img.shields.io/npm/types/@acm-97/react-snake-game
