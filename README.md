@@ -40,7 +40,7 @@ yarn add @acm-97/react-snake-game
 
 | Props         | Default       | Description  |
 | :----------- |:-------------| :-----|
-| snakeCoordinates | `[ [0, 0], [2, 0] ]` | initial position for the snake |
+| snakeCoordinates | `[[0,0],[2,0]]` | initial position for the snake |
 | foodCoordinates | `random` | initial position for the food |
 | direction | `RIGHT` | initial direction for the snake to move |
 | speed | `200` | speed of the snake |
