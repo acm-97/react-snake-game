@@ -1,33 +1,55 @@
 import React, { useEffect } from 'react';
-import classNames from 'classnames';
 
-import { useSnake } from '@/hooks';
-import { Food, Snake } from '@/components';
+import Snake from './Snake';
+import Obstacle from './Obstacles';
+import Food from './Food';
+import { getRandomCoordinates } from '../utils';
+import { gameAreaLimitsStyles, gameAreaStyles } from '../styles/gameArea';
+import { useGameArea } from '../hooks';
 
-
-export type AppProps = {
-  speed?: number;
-  canMove?: boolean;
-  direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
-  snakeDots?: number[][];
-  onGameOver?: () => void;
-  onEatFood?: () => void;
+export type UserStylesProps = {
+  gameArea?: object;
+  snake?: object;
+  food?: object;
+  obstacles?: object;
 };
 
-function GameArea({
-  speed: _speed,
-  canMove: _canMove,
-  direction: _direction,
-  snakeDots: _snakeDots,
-  onGameOver: _onGameOver,
-  onEatFood: _onEatFood,
-}: AppProps) {
-  const { canMove, snakeDots, food, onKeyDown, checkIfOutOfBorders, checkIfCollapsed, checkIfEat, moveSnake } =
-    useSnake({ _speed, _canMove, _direction, _snakeDots, _onGameOver, _onEatFood });
+export type StateProps = {
+  foodCoordinates?: [number, number];
+  snakeCoordinates?: [number, number][];
+  direction?: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+  speed?: number;
+  isRunning?: boolean;
+  numObstacles?: number;
+  generateObstacles?: boolean;
+};
+
+export type GameAreaProps = {
+  onGameOver?: (points: number) => void;
+  onEatFood?: (snakePosition: number[], foodPosition: number[]) => void;
+  styles?: UserStylesProps;
+  state?: StateProps;
+};
+
+const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFood: _onEatFood }: GameAreaProps) => {
+  const {
+    isRunning,
+    snakeDots,
+    food,
+    setFood,
+    onKeyDown,
+    checkIfOutOfBorders,
+    checkIfCollapsed,
+    checkIfEat,
+    moveSnake,
+    obstacles,
+    generateObstacles,
+  } = useGameArea({ state, _onGameOver, _onEatFood });
 
   useEffect(() => {
     let interval: any = null;
-    if (canMove) {
+
+    if (isRunning) {
       checkIfOutOfBorders();
       checkIfCollapsed();
       checkIfEat();
@@ -36,20 +58,26 @@ function GameArea({
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [snakeDots, canMove]);
+  }, [snakeDots, isRunning]);
 
   useEffect(() => {
-    // document.onkeydown = onKeyDown;
     document.addEventListener('keydown', onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setFood(getRandomCoordinates);
+    state?.generateObstacles && generateObstacles();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state?.generateObstacles]);
+
   return (
-    <div className={classNames('game-area')}>
-      <Snake snakeDots={snakeDots} />
-      <Food dot={food} />
+    <div className="game-area" style={{ ...gameAreaStyles, ...userStyles?.gameArea }}>
+      <Snake userStyles={userStyles} snakeDots={snakeDots} />
+      <Food userStyles={userStyles} dot={food} />
+      <Obstacle obstacles={obstacles} />
     </div>
   );
-}
+};
 
 export default GameArea;

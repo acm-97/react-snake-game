@@ -1,1 +1,1 @@
-export { default as useSnake } from './useSnake';
+export { default as useGameArea } from './useGameArea';

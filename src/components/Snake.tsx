@@ -1,17 +1,23 @@
 import React from 'react';
 
-type FoodProps = {
-  snakeDots: any[];
+import { UserStylesProps } from './GameArea';
+import { snakeStyles } from '../styles/snake';
+
+type SnakeProps = {
+  snakeDots: number[][];
+  userStyles?: UserStylesProps;
 };
 
-const Snake = ({ snakeDots }: FoodProps) => (
-  <div>
+const Snake = ({ userStyles, snakeDots }: SnakeProps) => (
+  <div className="snake-body">
     {snakeDots.map((dot, i) => {
       const style = {
+        ...snakeStyles,
         left: `${dot[0]}%`,
         top: `${dot[1]}%`,
+        ...userStyles?.snake,
       };
-      return <div className="snake" key={i} style={style} />;
+      return <div id={`snake-body-part-${i}`} className="snake-body-part" key={i} style={style} />;
     })}
   </div>
 );
