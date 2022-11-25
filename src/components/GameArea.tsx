@@ -4,7 +4,7 @@ import Snake from './Snake';
 import Obstacle from './Obstacles';
 import Food from './Food';
 import { getRandomCoordinates } from '../utils';
-import { gameAreaLimitsStyles, gameAreaStyles } from '../styles/gameArea';
+import { gameAreaStyles } from '../styles/gameArea';
 import { useGameArea } from '../hooks';
 
 export type UserStylesProps = {

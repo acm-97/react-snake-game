@@ -1,6 +1,6 @@
 {
   "name": "@acm-97/react-snake-game",
-  "version": "0.7.15",
+  "version": "0.7.18",
   "author": "acm-97",
   "description": "React component that displays the classic snake's game",
   "keywords": [

@@ -1,0 +1,197 @@
+.game-area-wrapper {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  box-shadow: rgb(171 191 192) 0px 0px 10px !important;
+  color: #009688;
+  border-radius: 8px;
+}
+
+.game-area-wrapper .game-area-overlay {
+  position: absolute;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+  background: #010a01;
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-area-wrapper .game-area {
+  width: 600px !important;
+  height: 99% !important;
+  background-image: url('../public/game-area-background.png');
+}
+
+.game-area-wrapper h1 {
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.game-area-wrapper h1, .game-area-wrapper h3 {
+  animation: flicker 1.5s infinite alternate !important;
+  color: #fff;
+}
+
+.game-area-wrapper .snake-body-part {
+  border: 1px solid grey !important;
+  border-radius: 30px !important;
+  width: 2.5% !important;
+  height: 3% !important;
+}
+
+.game-area-wrapper .food-wrapper {  
+  display: flex;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-area-wrapper .food-wrapper .food {
+  width: 50% !important;
+  height: 50% !important;
+}
+
+
+.game-area-wrapper .food-wrapper .food, .game-area-wrapper .food-wrapper {
+  animation: pulsate 1.5s infinite alternate;
+  border: 1px solid red;
+  border-radius:  10px;
+  box-shadow:  
+    0 0 .3rem #fff,
+    0 0 .3rem #fff,
+    0 0 1rem red,
+    0 0 0.8rem red,
+    0 0 1.8rem red,
+    inset 0 0 1.3rem red
+    
+}
+
+.game-area-wrapper .obstacle {
+  background: transparent !important;
+  border-top: 2px solid orange !important;
+  border-bottom: 2px solid orange !important;
+  border-left: 2px solid orange !important;
+  border-right: 2px solid orange !important;
+}
+
+.game-area-wrapper .play-button {
+  animation: pulsate 1.5s infinite alternate;
+  background: #FF9777;
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #FF9777,
+    0 0 82px #FF9777,
+    0 0 92px #FF9777,
+    0 0 102px #FF9777,
+    0 0 151px #FF9777;
+
+    
+    box-shadow: 0 0 .2rem #fff,
+    0 0 .2rem #fff,
+    0 0 2rem #FF9777,
+    0 0 0.8rem #FF9777,
+    0 0 1.8rem #FF9777,
+    inset 0 0 1.3rem #FF9777; 
+}
+
+.game-area-wrapper .play-button:hover {
+  cursor: pointer !important;
+}
+
+.game-area-wrapper .game-area-overlay .gameover-blood {
+  font-family: nosifer !important;
+  color: red !important;
+  font-size: 5em;
+  transition: all .25s ease !important;
+  -webkit-text-stroke: 0.1px rgba(246, 186, 74, 1) !important;
+  animation: drip 2.5s infinite alternate !important;
+}
+
+@keyframes drip {
+  to {
+    text-shadow:
+      4px 4px 1px #300000,
+      4px 6px 1px #400000,
+      4px 8px 1px #500000,
+      4px 10px 1px #600000,
+      4px 12px 1px #700000,
+      4px 14px 1px #800000,
+      4px 16px 1px #900000,
+      4px 18px 1px #A00000,
+      4px 20px 1px #B00000,
+      4px 22px 1px #C00000,
+      4px 24px 1px #D00000,
+      4px 26px 1px #E00000,
+      4px 28px 1px #F00000,
+      4px 30px 1px #FA0000,
+      4px 32px 1px #FB0000,
+      4px 34px 1px #FC0000,
+      4px 36px 1px #FD0000,
+      4px 38px 1px #FE0000,
+      4px 40px 2px #FF0000
+  }
+}
+
+
+@keyframes pulsate {
+    
+  100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #FF9777,
+      0 0 80px #FF9777,
+      0 0 90px #FF9777,
+      0 0 100px #FF9777,
+      0 0 150px #FF9777;
+  
+  }
+  
+  0% {
+
+      text-shadow:
+      0 0 2px #fff,
+      0 0 4px #fff,
+      0 0 6px #fff,
+      0 0 10px #FF9777,
+      0 0 45px #FF9777,
+      0 0 55px #FF9777,
+      0 0 70px #FF9777,
+      0 0 80px #FF9777;
+
+  }
+}
+
+
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #009688,
+      0 0 80px #009688,
+      0 0 90px #009688,
+      0 0 100px #009688,
+      0 0 150px #009688;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}

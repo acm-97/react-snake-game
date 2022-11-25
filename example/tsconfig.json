@@ -6,9 +6,6 @@
       "dom.iterable",
       "esnext"
     ],
-    "rootDir": "./src",
-    "outDir": "./dist/esm",
-    "declaration": true,
     "importHelpers": true,
     "allowJs": true,
     "checkJs": false,
@@ -22,10 +19,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "dist", "example"],
+  "exclude": ["node_modules", "dist"],
 }
