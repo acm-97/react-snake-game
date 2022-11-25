@@ -6,11 +6,12 @@ import { detectColition, getRandomCoordinates, getRandomObstacles } from '../uti
 
 export type useGameAreaProps = {
   _onGameOver?: (points: number) => void;
-  _onEatFood?: (snakePosition: number[], foodPosition: number[]) => void;
+  _onEatFood?: () => void;
+  _onMove?: (snakePosition: number[], foodPosition: number[]) => void;
   state?: StateProps;
 };
 
-const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
+const useGameArea = ({ state, _onGameOver, _onEatFood, _onMove }: useGameAreaProps) => {
   const [food, setFood] = useState<number[]>([]);
   const [speed, setSpeed] = useState<number>(200);
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -96,9 +97,10 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
         // console.log("before timeout", dots, snakeDots);
         setSnakeDots([...dots]);
       }
+      _onMove && _onMove(head, food)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [direction, snakeDots],
+    [_onMove, direction, snakeDots],
   );
 
   const generateObstacles = useCallback(() => {
@@ -173,7 +175,7 @@ const useGameArea = ({ state, _onGameOver, _onEatFood }: useGameAreaProps) => {
       setFood(getRandomCoordinates());
       state?.generateObstacles && generateObstacles();
       enLargeSnake();
-      _onEatFood && _onEatFood(head, myfood);
+      _onEatFood && _onEatFood();
     }
   }, [_onEatFood, enLargeSnake, food, generateObstacles, snakeDots, state?.generateObstacles]);
 

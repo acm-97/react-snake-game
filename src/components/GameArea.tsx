@@ -26,12 +26,13 @@ export type StateProps = {
 
 export type GameAreaProps = {
   onGameOver?: (points: number) => void;
-  onEatFood?: (snakePosition: number[], foodPosition: number[]) => void;
+  onEatFood?: () => void;
+  onMove?: (snakePosition: number[], foodPosition: number[]) => void;
   styles?: UserStylesProps;
   state?: StateProps;
 };
 
-const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFood: _onEatFood }: GameAreaProps) => {
+const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFood: _onEatFood, onMove: _onMove }: GameAreaProps) => {
   const {
     isRunning,
     snakeDots,
@@ -44,7 +45,7 @@ const GameArea = ({ state, styles: userStyles, onGameOver: _onGameOver, onEatFoo
     moveSnake,
     obstacles,
     generateObstacles,
-  } = useGameArea({ state, _onGameOver, _onEatFood });
+  } = useGameArea({ state, _onGameOver, _onEatFood, _onMove });
 
   useEffect(() => {
     let interval: any = null;
