@@ -29,7 +29,7 @@ yarn add @acm-97/react-snake-game
 ## Available props
 
 | Props         | Description |
-| :-----------: | :---------: |
+| :----------- | :--------- |
 | onGameOver    | you can pass a function here and recive the number of points collected |
 | onEatFood     | do anything after eat  |
 | onMove     |  you can pass a function here and recive the current positions of snake's head and food  |
@@ -39,7 +39,7 @@ yarn add @acm-97/react-snake-game
 ### State props
 
 | Props         | Default       | Description  |
-| :-----------: |:-------------:| -----:|
+| :----------- |:-------------| :-----|
 | snakeCoordinates | `[ [0, 0], [2, 0] ]` | initial position for the snake |
 | foodCoordinates | `random` | initial position for the food |
 | direction | `RIGHT` | initial direction for the snake to move |
@@ -51,7 +51,7 @@ yarn add @acm-97/react-snake-game
 ### Styles props
 
 | Props         | Description  |
-| :-----------: |:-------------:|
+| :----------- |:-------------|
 | gameArea  | plain object styles for the game area container |
 | snake | plain object styles for the snake element |
 | food  | plain object styles for the food element |
@@ -59,10 +59,10 @@ yarn add @acm-97/react-snake-game
 
 > Styles can also be accessed through the `.class` selector
 >
-> * **for gameArea:** "game-area"
-> * **for snake:** "snake-body"  and "snake-body-part-***specific part of snake*** "
-> * **for food:** "food-wrapper"  and "food "
-> * **for obstacles:** "obstacle"
+> * **for gameArea:** `.game-area`
+> * **for snake:** `.snake-body`  and `.snake-body-part-"specific part(number) of the snake"`
+> * **for food:** `.food-wrapper`  and `.food`
+> * **for obstacles:** `.obstacle`
 
 ## Some usage examples
 
@@ -112,7 +112,7 @@ const Component = () => {
 [npm-url]: https://www.npmjs.com/package/@acm-97/react-snake-game
 [npm-image]: https://img.shields.io/npm/v/@acm-97/react-snake-game
 [github-license]: https://img.shields.io/github/license/@acm-97/react-snake-game
-[github-license-url]: https://github.com/@acm-97/react-snake-game/blob/master/LICENSE
+[github-license-url]: https://github.com/acm-97/react-snake-game/blob/main/LICENSE
 [github-build]: https://github.com/acm-97/react-snake-game/actions/workflows/publish.yml/badge.svg
-[github-build-url]: https://github.com/@acm-97/react-snake-game/actions/workflows/publish.yml
+[github-build-url]: https://github.com/acm-97/react-snake-game/actions/workflows/publish.yml
 [npm-typescript]: https://img.shields.io/npm/types/@acm-97/react-snake-game
