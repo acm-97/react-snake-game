@@ -14,6 +14,16 @@ It is simple React counter.
 
 [**Live Demo**](https://acm-97.github.io/react-snake-game/)
 
+## Table of Contents
+
+- [@acm-97/react-snake-game](#acm-97react-snake-game)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Available props](#available-props)
+    - [State props](#state-props)
+    - [Styles props](#styles-props)
+  - [Some usage examples](#some-usage-examples)
+
 ## Installation
 
 ```bash
